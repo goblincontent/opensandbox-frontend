@@ -1,0 +1,21 @@
+// Firebase config object here (client side sdk)
+
+const firebaseConfig = {
+
+  apiKey: "AIzaSyD1SX4oup7LywLZ1Ibeul1kQ6xMhlimum4",
+
+  authDomain: "agentsfirebase.firebaseapp.com",
+
+  projectId: "agentsfirebase",
+
+  storageBucket: "agentsfirebase.appspot.com",
+
+  messagingSenderId: "991688537119",
+
+  appId: "1:991688537119:web:f80fd5976704a86057112a",
+
+  measurementId: "G-WQCPL2GEFX"
+
+};
+
+// Optional cookie-based auth (server side Firebase Admin sdk)
