@@ -1,2 +1,3 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<h1 class="text-green-400">Welcome to OpenSandbox</h1>
+<a class="btn btn-secondary w-64 rounded-full" href="/signup">Sign Up</a>
+<a class="btn btn-primary w-64 rounded-full" href="/login">Login</a>

@@ -13,3 +13,7 @@ firebase-debug.log
 .firebaserc
 firebase.json
 .npmrc
+.vscode
+notes.txt
+static/*.png
+static/*.jpg
