@@ -12,7 +12,7 @@
     import { writable } from "svelte/store";
     import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
-    const classes = [
+    const character_classes = [
         "Warrior",
         "Archer",
         "Mage",
@@ -33,10 +33,10 @@
     
     let showForm = false;
     
-    $: urlIsValid = $formData.url.match(/^(ftp|http|https):\/\/[^ "]+$/);
-    $: titleIsValid =
+    $: classIsValid = $formData.character_class !== ""
+    $: nameIsValid =
     $formData.character_name.length < 25 && $formData.character_name.length > 0;
-    $: formIsValid = urlIsValid && titleIsValid;
+    $: formIsValid = nameIsValid && classIsValid;
 
     async function upload(e: any) {
         uploading = true;
@@ -90,37 +90,53 @@
         <!-- INSERT sortable list here -->
         {#if showForm}
             <form
-                on:submit|preventDefault={addCharacter} 
-                class="bg-base-200 p-6 w-full mx-auto rounded-xl">
-                <div class="form-control w-full max-w-xs my-10 mx-auto text-center">
-                    <img 
-                        src={previewURL ?? "/default_character_image.png"}
-                        alt="character card"
-                        width="256"
-                        height="256"
-                        class="mx-auto"
-                    />
-                    <label for="photoURL" class="label">
-                        <span class="label-text">Upload a Character Card</span>
-                    </label>
-                    <input 
-                        name="photoURL"
-                        type="file" 
-                        class="file-input file-input-bordered w-full max-w-xs"
-                        on:change={upload}
-                        accept="image/png, image/jpeg, image/gif, image/webp" 
-                    />
-                    {#if uploading}
-                        <p>Uploading...</p>
-                        <progress class="progress progress-info w-56 mt-6"/>
-                    {/if}
-                </div>
-                <select name="class" class="select select-sm" bind:value={$formData.character_class}>
-                    {#each classes as character_class}
-                        <option value="{character_class.toLowerCase()}">{character_class}</option>
+                on:submit|preventDefault={addCharacter}
+                class="bg-base-200 p-6 w-full mx-auto rounded-xl"
+            >
+                <select 
+                    name="icon"  
+                    class="select select-sm"
+                    bind:value={$formData.character_class}
+                >
+                    {#each character_classes as character_class }
+                        <option value={character_class.toLowerCase()}>{character_class}</option>
                     {/each}
                 </select>
+
+                <input 
+                    type="text" 
+                    name="name"
+                    placeholder="Name"
+                    class="input input-sm"
+                    bind:value={$formData.character_name}
+                />
+
+                <div class="my-4">
+                    {#if !nameIsValid}
+                        <p class="text-error text-xs">Must have valid name</p>
+                    {/if}
+                    {#if !classIsValid}
+                        <p class="text-error text-xs">Must select a Class</p>
+                    {/if}
+                    {#if formIsValid}
+                        <p class="text-success text-xs">Looks Good!</p>
+                    {/if}
+                </div>
+                <button
+                    disabled={!formIsValid}
+                    type="submit" 
+                    class="btn btn-xs my-4">
+                    Add Character
+                </button>
             </form>
+        {:else}
+            <button 
+                on:click={() => {
+                    showForm = true;
+                }}
+                class="btn btn-outline btn-info block mx-auto my-4">
+                Create Character
+            </button>
         {/if}
     {/if}
 </main>
