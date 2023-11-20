@@ -1,7 +1,7 @@
 import { getAuth } from 'firebase-admin/auth';
 import { getFirestore } from 'firebase/firestore';
 import { FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL, FIREBASE_PRIVATE_KEY } from '$env/static/private';
-import pkg, { firestore } from 'firebase-admin';
+import pkg from 'firebase-admin';
 
 try {
   pkg.initializeApp({
@@ -17,5 +17,5 @@ try {
   }
 }
 
-export const adminDB = firestore();
+export const adminDB = getFirestore();
 export const adminAuth = getAuth();

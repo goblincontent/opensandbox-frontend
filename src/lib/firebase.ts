@@ -107,7 +107,7 @@ interface Character {
 
 //stores can be combined together using a "derived store", 
 //in this case, we can make our realtime derived store by combining our auth state and firebase data
-export const userData: Readable<UserData | null> = derived(user, ($user, set) => {
+export const userData: Readable<UserData | null> = derived(user, ($user, set: any) => {
     if ($user) {
         return docStore(`users/${$user.uid}`).subscribe(set);
     } else {
