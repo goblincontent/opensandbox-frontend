@@ -1,6 +1,8 @@
 <script lang="ts">
     import { page } from "$app/stores";
     import CharacterCard from "$lib/components/CharacterCard.svelte";
+    import SortableList from "$lib/components/SortableList.svelte";
+
     import { db, userData, user, storage } from "$lib/firebase";
     import {
         arrayRemove,
@@ -82,12 +84,30 @@
         formData.set(formDefaults);
         showForm = false;
     }
+
+    function sortList(e: CustomEvent) {
+      const newList = e.detail;
+      const userRef = doc(db, "users", $user!.uid);
+      setDoc(userRef, { characters: newList }, { merge: true });
+    }
+
+  
 </script>
 
 <main class="max-w-xl mx-auto">
     {#if $userData?.username == $page.params.username}
         <h1 class="mx-2 text-2xl font-bold mt-8 mb-4 text-center">Edit your Characters</h1>
         <!-- INSERT sortable list here -->
+        <SortableList list={$userData?.characters} on:sort={sortList} let:item let:index>
+            <div class="group relative">
+                <CharacterCard {...item} />
+                <button
+                on:click={() => deleteCharacter(item)}
+                class="btn btn-xs btn-error invisible group-hover:visible transition-all absolute -right-6 bottom-10"
+                >Delete</button
+                >
+            </div>
+        </SortableList>
         {#if showForm}
             <form
                 on:submit|preventDefault={addCharacter}
