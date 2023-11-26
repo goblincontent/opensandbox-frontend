@@ -95,6 +95,7 @@ interface UserData {
     username: string;
     bio: string;
     photoURL: string;
+    published: boolean;
     characters: any[]
 }
 

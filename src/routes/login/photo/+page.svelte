@@ -51,5 +51,5 @@
       {/if}
     </div>
   </form>
-  <a href="/" class="btn btn-primary">Finish</a>
+  <a href="/{$userData?.username}" class="btn btn-primary">Finish</a>
 </AuthCheck>

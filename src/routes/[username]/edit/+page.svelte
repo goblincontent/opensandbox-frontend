@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { onMount } from 'svelte';
     import { page } from "$app/stores";
     import CharacterCard from "$lib/components/CharacterCard.svelte";
     import SortableList from "$lib/components/SortableList.svelte";
@@ -14,6 +15,11 @@
     import { writable } from "svelte/store";
     import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
+    let url = ``;
+    onMount(() => {
+      url = window.location.origin;
+    });
+    
     const character_classes = [
         "Warrior",
         "Archer",
@@ -90,13 +96,21 @@
       const userRef = doc(db, "users", $user!.uid);
       setDoc(userRef, { characters: newList }, { merge: true });
     }
-
-  
+      
 </script>
 
 <main class="max-w-xl mx-auto">
     {#if $userData?.username == $page.params.username}
-        <h1 class="mx-2 text-2xl font-bold mt-8 mb-4 text-center">Edit your Characters</h1>
+        <h1 class="mx-2 text-2xl font-bold mt-8 mb-4 text-center">Edit your World</h1>
+        <div class="text-center mb-8">
+            <p>
+                World link:
+                <a href="{`/${$userData?.username}`}" class="link link-accent">
+                    {`${url}/${$userData?.username}`}
+                </a>
+            </p>
+        </div>
+        
         <!-- INSERT sortable list here -->
         <SortableList list={$userData?.characters} on:sort={sortList} let:item let:index>
             <div class="group relative">

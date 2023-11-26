@@ -1,5 +1,7 @@
 <script lang="ts">
     import type { PageData } from "./$types";
+    import { page } from '$app/stores';
+    import { userData } from "$lib/firebase";
 
     export let data: PageData;
 </script>
@@ -16,7 +18,7 @@
     </h1>
 
     <img src={data.photoURL ?? "/user.png"} 
-        alt="photoURL" 
+        alt="photoURL"
         class="mx-auto"
         width="256"
     />
@@ -27,4 +29,7 @@
             {@debug item}
         {/each}
     </ul>
+    {#if $userData?.username === $page.params.username }
+        <a href="{$userData?.username}/edit" class="btn btn-primary">Edit</a>
+    {/if}
 </main>
