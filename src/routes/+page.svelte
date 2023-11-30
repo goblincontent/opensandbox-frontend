@@ -1,28 +1,11 @@
-<script>
-    import { userData } from "$lib/firebase";
+<script lang='ts'>
+  import LandingPage from "$lib/pages/LandingPage.svelte";
+</script>
+  
+<svelte:head>
+  <title>OpenSandbox - Open Source Interactivity Project</title>
+  <meta name="description" content="Proof of concept for a massively multiplayer sandbox world" />
+</svelte:head>
 
-  </script>
-  
-  <svelte:head>
-    <title>Kung.foo - a place for links</title>
-    <meta name="description" content="Demo project for the Full SvelteKit Course by Fireship" />
-  </svelte:head>
-  
-  <main class="flex w-full min-h-screen">
-  
-    <div class="hero bg-base-200">
-      <div class="hero-content text-center">
-        <div class="w-full">
-          <h1 class="text-7xl font-bold">Kung.foo</h1>
-          <p class="py-6 text-2xl">One simple link to share your entire developer portfolio</p>
-          {#if $userData?.username}
-            <a href="/{$userData.username}/edit" class="btn btn-primary">Edit Profile</a>
-          {:else}
-            <a href="/login" class="btn btn-primary">Get Started</a>
-            <a href="/fireship" class="btn btn-secondary">Example Profile</a>
-          {/if}
-        </div>
-      </div>
-    </div>
-    
-  </main>
+
+<LandingPage/>

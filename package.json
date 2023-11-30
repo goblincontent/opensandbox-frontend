@@ -10,10 +10,13 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
 	},
 	"devDependencies": {
+		"@iconify/svelte": "^3.1.4",
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/kit": "^1.20.4",
+		"@types/debug": "^4.1.12",
 		"autoprefixer": "^10.4.16",
 		"daisyui": "^3.9.4",
+		"debug": "^4.3.4",
 		"firebase": "^10.6.0",
 		"postcss": "^8.4.31",
 		"svelte": "^4.0.5",

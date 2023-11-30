@@ -51,8 +51,8 @@
 </script>
 
 <AuthCheck>
-  {#if $userData.username }
-  <p class="">Your username is: <span class="text-green-500">@{$userData.username}</span></p>
+  {#if $userData?.username }
+  <p class="">Your username is: <span class="text-green-500">@{$userData?.username}</span></p>
   {/if}
   <form class="w-2/5" on:submit|preventDefault={confirmUsername}>
     <input 
@@ -82,7 +82,9 @@
       {#if isAvailable}
         <button class="btn btn-success">Confirm username @{username}</button>
       {/if}
+
     </div>
   </form>
+  <a href="/login/photo" class="btn btn-primary">Next</a>
 
 </AuthCheck>
